@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import ClippersLogo from './icons/clippersLogo.jsx'
-import getTeams from './utils/getTeams.jsx'
+import { ClippersLogo, PacersLogo, SixersLogo } from './icons/clippersLogo.jsx'
 
 // DONT KEEP API KEY IN THE FILES
 
@@ -71,6 +69,9 @@ function App() {
             <p>{team.name}</p>
           )
         })}
+        {/* <ClippersLogo />
+        <PacersLogo />
+        <SixersLogo /> */}
       </div>
     </>
   )
