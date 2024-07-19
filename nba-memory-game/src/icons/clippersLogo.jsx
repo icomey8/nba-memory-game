@@ -6,3 +6,6 @@ function ClippersLogo() {
 }
 
 export default ClippersLogo;
+
+
+// create a card component, import it here.
