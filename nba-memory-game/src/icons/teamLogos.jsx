@@ -32,7 +32,7 @@ import {
 	wizardsLogo,
 } from "../assets";
 
-
+// HEAT LOGO IS TOO SMALL
 
 const logoSize = 100;
 
@@ -79,7 +79,7 @@ function Hawks() {
 }
 
 function Heat() {
-  return <img src={heatLogo} alt="Heat Logo" width={logoSize} height={logoSize} />;
+  return <img src={heatLogo} alt="Heat Logo" width={225} height={225} />;		// imported png too small, find larger image?
 }
 
 function Hornets() {

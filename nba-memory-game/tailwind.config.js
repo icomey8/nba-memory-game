@@ -6,6 +6,15 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'test-pattern': "url('/src/assets/test-bball5.svg')",
+      },
+      gridTemplateColumns: {
+        'team-col': 'repeat(6, minmax(0, 192px))',
+      },
+      gridTemplateRows: {
+        'team-row': 'repeat(2, minmax(0, 240px))',
+      },
       colors: {
         "primary-color": "var(--primary-bg)",
       }
