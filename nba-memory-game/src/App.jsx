@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { ClippersLogo, PacersLogo, SixersLogo } from './icons/clippersLogo.jsx'
+import * as TeamLogos from './icons/teamLogos.jsx'
+import Card  from './components/Card.jsx'
 
 // DONT KEEP API KEY IN THE FILES
+// we will control the screen with a state variable
+
+
 
 function getRandomIntInclusive(min, max) {
   const minCeiled = Math.ceil(min);
@@ -35,6 +39,8 @@ function chooseRandomTeams(setCurrentTeams, teams) {
 function App() {
   const [teams, setTeams] = useState([]); // full list of 30 teams
   const [currentTeams, setCurrentTeams] = useState([]); // 12 random teams
+
+  let api_key = import.meta.env.VITE_BDL_API_KEY;
   
   useEffect(() => { 
     async function fetchData() {
@@ -64,14 +70,16 @@ function App() {
   return (
     <>
       <div className='h-screen w-screen bg-primary-color flex flex-col justify-center items-center'>
-        {currentTeams.map((team) => {
+        {/* {currentTeams.map((team) => {
           return (
             <p>{team.name}</p>
           )
-        })}
+        })} */}
         {/* <ClippersLogo />
         <PacersLogo />
         <SixersLogo /> */}
+        <Card teamLogo={<TeamLogos.Clippers />} />
+        <Card teamLogo={<TeamLogos.Pacers />} />
       </div>
     </>
   )
