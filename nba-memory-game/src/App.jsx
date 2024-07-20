@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
-import * as TeamLogos from './icons/teamLogos.jsx'
+import TeamLogos from './icons/teamLogos.jsx'
 import Card  from './components/Card.jsx'
 
 // DONT KEEP API KEY IN THE FILES
@@ -32,13 +32,12 @@ function chooseRandomTeams(setCurrentTeams, teams) {
     setCurrentTeams(selectedTeams);
   }
 
-
-
-
+// using team.id as key for now
 
 function App() {
   const [teams, setTeams] = useState([]); // full list of 30 teams
-  const [currentTeams, setCurrentTeams] = useState([]); // 12 random teams
+  const [currentTeams, setCurrentTeams] = useState([]); // 12 random teams from the 30
+  // const [clickedteams, setClickedTeams] = useState([]); // teams that have been clicked
 
   let api_key = import.meta.env.VITE_BDL_API_KEY;
   
@@ -55,7 +54,7 @@ function App() {
         const data = await response.json();
         const teamsData = data.data.slice(0, 30);
         setTeams(teamsData);
-        chooseRandomTeams(setCurrentTeams, teamsData);
+        chooseRandomTeams(setCurrentTeams, teamsData); // make handler function for setCurrentTeams if you're going to move it to diff fiel
 
 
       } catch (error) {
@@ -65,21 +64,22 @@ function App() {
     fetchData();
     }, []);
   
-
+  // console.log(currentTeams);
 
   return (
     <>
-      <div className='h-screen w-screen bg-primary-color flex flex-col justify-center items-center'>
+      <div className='flex flex-col items-center justify-center w-screen h-screen bg-primary-color'>
         {/* {currentTeams.map((team) => {
+          const TeamLogoComponent = TeamLogos[team.name];
+
           return (
-            <p>{team.name}</p>
+            <div key={team.id}>
+              <Card teamLogo={<TeamLogoComponent />} />
+            </div>
           )
-        })} */}
-        {/* <ClippersLogo />
-        <PacersLogo />
-        <SixersLogo /> */}
-        <Card teamLogo={<TeamLogos.Clippers />} />
-        <Card teamLogo={<TeamLogos.Pacers />} />
+        }
+      )} */}
+
       </div>
     </>
   )

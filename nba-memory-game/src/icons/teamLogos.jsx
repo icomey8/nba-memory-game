@@ -94,7 +94,7 @@ function Kings() {
   return <img src={kingsLogo} alt="Kings Logo" width={logoSize} height={logoSize} />;
 }
 
-function Knick() {
+function Knicks() {
   return <img src={knicksLogo} alt="Knicks Logo" width={logoSize} height={logoSize} />;
 }
 
@@ -158,6 +158,38 @@ function Wizards() {
   return <img src={wizardsLogo} alt="Wizards Logo" width={logoSize} height={logoSize} />;
 }
 
+const TeamLogos = {
+	"Clippers": Clippers,
+	"Pacers": Pacers,
+	"76ers": Sixers,
+	"Trail Blazers": Blazers,
+	"Bucks": Bucks,
+	"Bulls": Bulls,
+	"Cavaliers": Cavs,
+	"Celtics": Celtics,
+	"Grizzlies": Grizzlies,
+	"Hawks": Hawks,
+	"Heat": Heat,
+	"Hornets": Hornets,
+	"Jazz": Jazz,
+	"Kings": Kings,
+	"Knicks": Knicks,
+	"Lakers": Lakers,
+	"Magic": Magic,
+	"Mavericks": Mavs,
+	"Nets": Nets,
+	"Nuggets": Nuggets,
+	"Pelicans": Pelicans,
+	"Pistons": Pistons,
+	"Raptors": Raptors,
+	"Rockets": Rockets,
+	"Spurs": Spurs,
+	"Suns": Suns,
+	"Thunder": Thunder,
+	"Timberwolves": Timberwolves,
+	"Warriors": Warriors,
+	"Wizards": Wizards,
+}
 
 
-export { Clippers, Pacers, Sixers, Blazers, Bucks, Bulls, Cavs, Celtics, Grizzlies, Hawks, Heat, Hornets, Jazz, Kings, Knick, Lakers, Magic, Mavs, Nets, Nuggets, Pelicans, Pistons, Raptors, Rockets, Spurs, Suns, Thunder, Timberwolves, Warriors, Wizards };
+export default TeamLogos
