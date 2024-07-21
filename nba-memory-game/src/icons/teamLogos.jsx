@@ -36,8 +36,6 @@ import {
 
 const logoSize = 100;
 
-// make img dimensions into variables in case we want to change them later
-
 function Clippers() {
 	return <img src={clippersLogo} alt="Clippers Logo" width={logoSize} height={logoSize} />;
 }

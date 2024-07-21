@@ -30,11 +30,32 @@ function chooseRandomTeams(setCurrentTeams, teams) {
 	setCurrentTeams(selectedTeams);
 }
 
+
+function shuffleTeams(currentTeams) {
+  const sortedArr = structuredClone(currentTeams);
+  for (let i = sortedArr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [sortedArr[i], sortedArr[j]] = [sortedArr[j], sortedArr[i]];
+  }
+  return sortedArr;
+}
+
+
+function handleShuffle(currentTeams, setCurrentTeams) {
+  const shuffledTeams = shuffleTeams(currentTeams);
+  setCurrentTeams(shuffledTeams);
+}
+
+
+
+
+
 // using team.id as key for now
 
 function App() {
 	const [teams, setTeams] = useState([]); // full list of 30 teams
 	const [currentTeams, setCurrentTeams] = useState([]); // 12 random teams from the 30
+  const [showCards, setShowCards] = useState(false);
 	// const [clickedteams, setClickedTeams] = useState([]); // teams that have been clicked
 
 	let api_key = import.meta.env.VITE_BDL_API_KEY;
@@ -52,7 +73,7 @@ function App() {
 				const data = await response.json();
 				const teamsData = data.data.slice(0, 30);
 				setTeams(teamsData);
-				chooseRandomTeams(setCurrentTeams, teamsData); // make handler function for setCurrentTeams if you're going to move it to diff fiel
+				chooseRandomTeams(setCurrentTeams, teamsData); // make handler function for setCurrentTeams if you're going to move it to diff file
 			} catch (error) {
 				console.log(error);
 			}
@@ -61,10 +82,6 @@ function App() {
 	}, []);
 
 	// console.log(currentTeams);
-
-	function handleClick() {
-		console.log("clicked");
-	}
 
 	return (
 		<>
@@ -105,7 +122,7 @@ function App() {
 						const TeamLogoComponent = TeamLogos[team.name];
 
 						return (
-							<div key={team.id} className="" onClick={handleClick}>
+							<div key={team.id} className="" onClick={() => handleShuffle(currentTeams, setCurrentTeams)}>
 								<Card teamLogo={<TeamLogoComponent />} />
 							</div>
 						);
