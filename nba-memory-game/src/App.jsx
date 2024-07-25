@@ -3,60 +3,41 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import TeamLogos from "./icons/teamLogos.jsx";
 import Card from "./components/Card.jsx";
+import chooseRandomTeams  from "./utils/randomizer.jsx";
+import handleShuffle from "./utils/shuffle.jsx";
 
-// DONT KEEP API KEY IN THE FILES
-// we will control the screen with state variables
 
-function getRandomIntInclusive(min, max) {
-	const minCeiled = Math.ceil(min);
-	const maxFloored = Math.floor(max);
-	return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+
+
+function endGame() {
+  console.log("end game");  
 }
 
-function chooseRandomTeams(setCurrentTeams, teams) {
-	let selectedTeams = [];
-	while (selectedTeams.length < 12) {
-		let team_number = getRandomIntInclusive(0, 29);
-		let team = teams[team_number];
-
-		if (selectedTeams.length === 0) {
-			selectedTeams.push(team); // could push {team: boolean} where booolean is whether the team has been clicked
-		} else {
-			if (!selectedTeams.some((e) => e.id === team.id)) {
-				selectedTeams.push(team);
-			}
-		}
-	}
-	setCurrentTeams(selectedTeams);
-}
-
-
-function shuffleTeams(currentTeams) {
-  const sortedArr = structuredClone(currentTeams);
-  for (let i = sortedArr.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [sortedArr[i], sortedArr[j]] = [sortedArr[j], sortedArr[i]];
-  }
-  return sortedArr;
-}
-
-
-function handleShuffle(currentTeams, setCurrentTeams) {
-  const shuffledTeams = shuffleTeams(currentTeams);
-  setCurrentTeams(shuffledTeams);
-}
-
-
-
-
-
-// using team.id as key for now
 
 function App() {
-	const [teams, setTeams] = useState([]); // full list of 30 teams
-	const [currentTeams, setCurrentTeams] = useState([]); // 12 random teams from the 30
-  const [showCards, setShowCards] = useState(false);
-	// const [clickedteams, setClickedTeams] = useState([]); // teams that have been clicked
+	const [teams, setTeams] = useState([]); //? full list of 30 teams
+	const [currentTeams, setCurrentTeams] = useState([]); //? 12 random teams from the 30
+	const [clickedTeams, setClickedTeams] = useState({}); //? teams that have/haven't been clicked
+  const [gameState, setGameState] = useState({
+    gameStart: false,
+    over: false,
+    won: false,
+    score: 0,
+  });
+
+  const handleCurrentTeams = (selectedTeams) => {
+    setCurrentTeams(selectedTeams);
+  }
+
+  const handleShuffling = (shuffledTeams) => {
+    setCurrentTeams(shuffledTeams);
+  }
+
+  function continueGame(clickedTeams, setClickedTeams, team, currentTeams) {
+    console.log("continue game");
+    setClickedTeams({...clickedTeams, [team.id]: true});
+    handleShuffle(currentTeams, handleShuffling);
+  }
 
 	let api_key = import.meta.env.VITE_BDL_API_KEY;
 
@@ -73,29 +54,28 @@ function App() {
 				const data = await response.json();
 				const teamsData = data.data.slice(0, 30);
 				setTeams(teamsData);
-				chooseRandomTeams(setCurrentTeams, teamsData); // make handler function for setCurrentTeams if you're going to move it to diff file
+				chooseRandomTeams(handleCurrentTeams, teamsData); 
+        
 			} catch (error) {
 				console.log(error);
 			}
 		}
+    
 		fetchData();
-	}, []);
+    const initializeClickedStatus = {}
+    currentTeams.forEach(team => {
+      initializeClickedStatus[team.id] = false;
+    });
+    setClickedTeams(initializeClickedStatus);
 
-	// console.log(currentTeams);
+    
+	}, []); //! change to trigger useEffect when score is 0?
+
+
 
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center w-screen h-screen bg-no-repeat bg-test-pattern">
-				{/* {currentTeams.map((team) => {
-          const TeamLogoComponent = TeamLogos[team.name];
-
-          return (
-            <div key={team.id}>
-              <Card teamLogo={<TeamLogoComponent />} />
-            </div>
-          )
-        }
-      )} */}
 				<div className="flex w-[1252px] items-end justify-between">
 					<div className="flex items-center gap-4">
 						<h1 className="text-4xl font-bold">Memory Master</h1>
@@ -120,9 +100,17 @@ function App() {
 				<div className="grid gap-5 pt-5 grid-cols-team-col grid-rows-team-row">
 					{currentTeams.map((team) => {
 						const TeamLogoComponent = TeamLogos[team.name];
+            const isClicked = clickedTeams[team.id];
+            
+            //? if game start is false, render menu.  
+            //? if true, then check if game is over 
+              //? if false, then render game like below
+              //? if true and win, render win screen. if true and lose, render lose screen
 
 						return (
-							<div key={team.id} className="" onClick={() => handleShuffle(currentTeams, setCurrentTeams)}>
+							<div key={team.id} className="" onClick={() => {
+                isClicked ? endGame() : continueGame(clickedTeams, setClickedTeams, team, currentTeams);
+              }}>
 								<Card teamLogo={<TeamLogoComponent />} />
 							</div>
 						);
