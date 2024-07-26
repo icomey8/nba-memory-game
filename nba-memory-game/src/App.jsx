@@ -24,7 +24,7 @@ function App() {
     gameStart: false,
     over: false,
     won: false,
-    score: 0, //! doesn't update immediately
+    score: 0, 
   });
 
   const handleCurrentTeams = (selectedTeams) => {
@@ -54,26 +54,26 @@ function App() {
 
 	let api_key = import.meta.env.VITE_BDL_API_KEY;
 
+  async function fetchData() {
+    try {
+      const response = await fetch("https://api.balldontlie.io/v1/teams", {
+        method: "GET",
+        headers: { Authorization: api_key },
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      const teamsData = data.data.slice(0, 30);
+      setTeams(teamsData);
+      chooseRandomTeams(handleCurrentTeams, teamsData); 
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 	useEffect(() => {
-		async function fetchData() {
-			try {
-				const response = await fetch("https://api.balldontlie.io/v1/teams", {
-					method: "GET",
-					headers: { Authorization: api_key },
-				});
-				if (!response.ok) {
-					throw new Error(`Error: ${response.status}`);
-				}
-				const data = await response.json();
-				const teamsData = data.data.slice(0, 30);
-				setTeams(teamsData);
-				chooseRandomTeams(handleCurrentTeams, teamsData); 
-        
-			} catch (error) {
-				console.log(error);
-			}
-		}
-    
 		fetchData();
     const initializeClickedStatus = {}
     currentTeams.forEach(team => {
@@ -82,9 +82,22 @@ function App() {
     setClickedTeams(initializeClickedStatus);
 
     
-	}, []); //! change to trigger useEffect when score is 0? depends on how we handle game over event.
+	}, []); 
 
-
+  const resetGame = async () => { 
+    //! does not need to be api call.  our selection of random teams is local, so we don't need to fetch api data since it's the same 30 teams.  we can just shuffle the teams we have.
+    setGameState({
+      gameStart: true,
+      over: false,
+      won: false,
+      score: 0,
+    });
+    const initializeClickedStatus = {}
+    currentTeams.forEach(team => {
+      initializeClickedStatus[team.id] = false;
+    });
+    setClickedTeams(initializeClickedStatus);
+  }
 
 	return (
 		<>
@@ -98,8 +111,9 @@ function App() {
               setGameState={setGameState}
               gameState={gameState}
               updateScore={updateScore}
+              resetGame={resetGame}
               />
-      ) : <MenuScreen />}
+      ) : <MenuScreen setGameState={setGameState} gameState={gameState}/>}
 
       
 		</>

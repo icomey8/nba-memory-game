@@ -2,13 +2,13 @@ import React from 'react';
 import Card from './Card'; // Adjust the import path as necessary
 import TeamLogos from '../icons/teamLogos.jsx'; // Adjust the import path as necessary
 
-const GameBoard = ({ currentTeams, clickedTeams, setClickedTeams, endGame, continueGame, setGameState, updateScore, gameState }) => {
+const GameBoard = ({ resetGame, currentTeams, clickedTeams, setClickedTeams, endGame, continueGame, setGameState, updateScore, gameState }) => {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-no-repeat bg-test-pattern">
       <div className="flex w-[1252px] items-end justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-4xl font-bold">Memory Master</h1>
-          <button className="w-6 p-1 bg-[#321E0F] rounded mt-1.5 hover:bg-[#462002]">
+          <button onClick={resetGame} className="w-6 p-1 bg-[#321E0F] rounded mt-1.5 hover:bg-[#462002]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
