@@ -4,6 +4,7 @@ import "./App.css";
 import TeamLogos from "./icons/teamLogos.jsx";
 import Card from "./components/Card.jsx";
 import GameBoard from "./components/gameScreen.jsx";
+import MenuScreen from "./components/Menu.jsx";
 import chooseRandomTeams  from "./utils/randomizer.jsx";
 import handleShuffle from "./utils/shuffle.jsx";
 
@@ -87,7 +88,7 @@ function App() {
 
 	return (
 		<>
-      { !(gameState.gameStart) ? (
+      { (gameState.gameStart) ? (
               <GameBoard
               currentTeams={currentTeams}
               clickedTeams={clickedTeams}
@@ -98,7 +99,7 @@ function App() {
               gameState={gameState}
               updateScore={updateScore}
               />
-      ) : console.log("game not started")}
+      ) : <MenuScreen />}
 
       
 		</>
