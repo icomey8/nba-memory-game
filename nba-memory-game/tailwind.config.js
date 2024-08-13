@@ -17,6 +17,15 @@ export default {
       },
       colors: {
         "primary-color": "var(--primary-bg)",
+      },
+      keyframes: {
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
+        },
+      },
+      animation: {
+        gradient: "gradient 3s linear infinite",
       }
     },
   },

@@ -12,4 +12,18 @@
 }
 
 
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #ffffff,
+    #F98110,
+    #ce1b1b,
+    #F98110,
+    #ffffff,
+    #F98110,
+    #ce1b1b
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+}
 
