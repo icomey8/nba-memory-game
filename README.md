@@ -9,8 +9,8 @@ Built with **React+Vite** and **Tailwind**
 ## Screenshots
 
 ## Remaining Updates
-- Finish loading screens
-- Animations for Card clicks
+- ~~Finish loading screen~~
+- Animations for card clicks (smoother animations)
 
 ### Other Resources
 
