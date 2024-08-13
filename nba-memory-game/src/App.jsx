@@ -44,7 +44,7 @@ function App() {
       });
       setClickedTeams(initializeClickedStatus);
       chooseRandomTeams(handleCurrentTeams, teams);
-    }, 2750);
+    }, 750);
 	};
 
 	function endGame() {
