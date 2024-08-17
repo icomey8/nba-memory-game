@@ -26,6 +26,7 @@ export default {
       },
       animation: {
         gradient: "gradient 3s linear infinite",
+        'spin-slow': "spin 3s linear infinite",
       }
     },
   },
