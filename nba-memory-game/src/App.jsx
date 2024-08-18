@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import "./App.css";
 import GameBoard from "./components/gameScreen.jsx";
 import MenuScreen from "./components/Menu.jsx";
@@ -8,7 +9,10 @@ import chooseRandomTeams from "./utils/randomizer.jsx";
 import handleShuffle from "./utils/shuffle.jsx";
 import LoadingScreen from "./components/loadingScreen.jsx";
 
+
 function App() {
+  injectSpeedInsights();
+  
   const [loading, setLoading] = useState(false);
 	const [teams, setTeams] = useState([]); //? full list of 30 teams
 	const [currentTeams, setCurrentTeams] = useState([]); //? 12 random teams from the 30
