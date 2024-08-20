@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { injectSpeedInsights } from '@vercel/speed-insights';
+import { injectSpeedInsights } from "@vercel/speed-insights";
 import "./App.css";
 import GameBoard from "./components/gameScreen.jsx";
 import MenuScreen from "./components/Menu.jsx";
@@ -9,11 +9,10 @@ import chooseRandomTeams from "./utils/randomizer.jsx";
 import handleShuffle from "./utils/shuffle.jsx";
 import LoadingScreen from "./components/loadingScreen.jsx";
 
-
 function App() {
-  injectSpeedInsights();
-  
-  const [loading, setLoading] = useState(false);
+	injectSpeedInsights();
+
+	const [loading, setLoading] = useState(false);
 	const [teams, setTeams] = useState([]); //? full list of 30 teams
 	const [currentTeams, setCurrentTeams] = useState([]); //? 12 random teams from the 30
 	const [clickedTeams, setClickedTeams] = useState({}); //? teams that have/haven't been clicked
@@ -33,22 +32,22 @@ function App() {
 	};
 
 	const startNewGame = (setGameState) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setGameState({
-        gameStart: true,
-        over: false,
-        won: false,
-        score: 0,
-      });
-      const initializeClickedStatus = {};
-      currentTeams.forEach((team) => {
-        initializeClickedStatus[team.id] = false;
-      });
-      setClickedTeams(initializeClickedStatus);
-      chooseRandomTeams(handleCurrentTeams, teams);
-    }, 950);
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+			setGameState({
+				gameStart: true,
+				over: false,
+				won: false,
+				score: 0,
+			});
+			const initializeClickedStatus = {};
+			currentTeams.forEach((team) => {
+				initializeClickedStatus[team.id] = false;
+			});
+			setClickedTeams(initializeClickedStatus);
+			chooseRandomTeams(handleCurrentTeams, teams);
+		}, 950);
 	};
 
 	function endGame() {
@@ -126,9 +125,9 @@ function App() {
 		chooseRandomTeams(handleCurrentTeams, teams);
 	};
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
+	if (loading) {
+		return <LoadingScreen />;
+	}
 
 	return (
 		<>

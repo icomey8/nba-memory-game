@@ -3,27 +3,24 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: white;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	color: white;
 
-
-  --primary-bg: #0c0f11;
-  --logo-size: 100;
+	--primary-bg: #0c0f11;
+	--logo-size: 100;
 }
-
 
 .gradient-text {
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #F98110,
-    #ce1b1b,
-    #F98110,
-    #ffffff,
-    #F98110,
-    #ce1b1b
-  );
-  background-size: 300% 300%;
-  background-clip: text;
+	background: linear-gradient(
+		to right,
+		#ffffff,
+		#f98110,
+		#ce1b1b,
+		#f98110,
+		#ffffff,
+		#f98110,
+		#ce1b1b
+	);
+	background-size: 300% 300%;
+	background-clip: text;
 }
-
