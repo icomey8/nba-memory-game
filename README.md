@@ -3,6 +3,7 @@
 NBA Memory Game is a simple card memorization game.  A set of cards with NBA team logos is generated and the player must sucessfully click all cards without clicking on any of them more than once.
 * Created for <ins>personal educational purposes</ins>, to practice React fundamentals like conditional rendering, arrays, hooks, event handlers, and components. 
 * Built with **React+Vite** and **Tailwind**
+* Hosted with **Vercel** at https://nba-memory-game.vercel.app/.  Try it out! :)
 
 ## Remaining Updates
 - [x] Finish loading screen
